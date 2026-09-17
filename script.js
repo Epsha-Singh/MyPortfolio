@@ -57,3 +57,22 @@ document.querySelectorAll('.project-card').forEach(card => {
     card.classList.toggle('flipped');
   });
 });
+
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
+const root = document.documentElement;
+
+function applyTheme(theme) {
+  root.setAttribute('data-theme', theme);
+  themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+  localStorage.setItem('theme', theme);
+}
+
+// load saved preference (defaults to dark)
+applyTheme(localStorage.getItem('theme') || 'dark');
+
+themeToggle.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+});
